@@ -1,0 +1,156 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+
+    <title> Stark Uploader</title>
+
+    <link type="text/css" rel="stylesheet" href="~/Content/fileUpload/css/bootstrap.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="~/Content/fileUpload/css/font-awesome.min.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="~/Content/fileUpload/css/my.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="~/Content/fileUpload/css/prettify.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="~/Content/fileUpload/css/shCore.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="~/Content/fileUpload/css/shCoreEclipse.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="~/Content/fileUpload/css/jquery-ui.min.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="~/Content/fileUpload/css/jquery.ui.plupload.css" media="screen" />
+
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="~/Content/fileUpload/css/my_ie_lte7.css" />
+    <![endif]-->
+
+    <link href="~/Content/fileUpload/css/font-fam.css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300|Bree+Serif" rel="stylesheet" type="text/css">
+
+    <!--[if IE 7]>
+        <link rel="stylesheet" href="~/Content/fileUpload/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="~/Content/fileUpload/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="~/Content/fileUpload/js/jquery.js" charset="UTF-8"></script>
+
+
+</head>
+<body class="examples examples-index">
+     
+
+    <section id="content">
+        <div class="container">
+            
+
+            <div class="clearfix"> </div>
+ 
+
+
+             
+            <div id="example">
+ 
+                <div id="uploader">
+                    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+                </div>
+
+                <script type="text/javascript">
+                    // Initialize the widget when the DOM is ready
+                    $(function () {
+                        $("#uploader").plupload({
+                            // General settings
+                            runtimes: 'html5,flash,silverlight,html4',
+                            url: "/UploadSS/Uploadstar",
+
+                            // Maximum file size
+                            max_file_size: '9000mb',
+
+                            chunk_size: '1mb',
+
+                            // Resize images on clientside if we can
+                            resize: {
+                                width: 500,
+                                height: 500
+                                //, quality: 100,
+                               // crop: false // crop to exact dimensions
+                            },
+
+                            // Specify what files to browse for
+                            filters: [
+                                { title: "Image files", extensions: "jpg,gif,png" },
+                                { title: "Zip files", extensions: "zip,mp3" }
+                            ],
+
+                            // Rename files by clicking on their titles
+                            rename: true,
+
+                            // Sort files
+                            sortable: true,
+
+                            // Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+                            dragdrop: true,
+
+                            // Views to activate
+                            views: {
+                                list: true,
+                                thumbs: true, // Show thumbs
+                                active: 'thumbs'
+                            },
+
+                            // Flash settings
+                            flash_swf_url: '@Url.Content("~/Content/fileUpload/Moxie.swf")',
+
+                            // Silverlight settings
+                            silverlight_xap_url: '@Url.Content("~/Content/fileUpload/Moxie.xap")'
+                        });
+                    });
+                </script>
+
+
+            </div>
+
+            <br />
+
+
+
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            sonu singh
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="~/Content/fileUpload/js/bootstrap.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Content/fileUpload/js/shCore.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Content/fileUpload/js/shBrushPhp.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Content/fileUpload/js/shBrushjScript.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Content/fileUpload/js/jquery-ui.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Content/fileUpload/js/plupload.full.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Content/fileUpload/js/jquery.ui.plupload.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Content/fileUpload/js/themeswitcher.js" charset="UTF-8"></script>
+
+
+
+    <script type="text/javascript">
+        (function ($) {
+            var langMap = {
+                'javascript': 'js',
+                'js': 'js',
+                'php': 'php',
+                'html': 'php'
+            };
+
+            $.each(['php', 'javascript', 'html'], function (i, lang) {
+                $('pre.' + lang).attr('class', 'brush: ' + langMap[lang] + '; toolbar: false;');
+            });
+
+            SyntaxHighlighter.all();
+        }(jQuery));
+    </script>
+
+
+
+</body>
+</html>

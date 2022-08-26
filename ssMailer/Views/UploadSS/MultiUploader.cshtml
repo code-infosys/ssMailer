@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MultiUploader</title>
+
+    <link href="~/Content/MultiUploader/css/style.css" rel="stylesheet" />
+   
+</head>
+<body>
+    <div> 
+
+        <form id="upload" method="post" action="" enctype="multipart/form-data">
+            <div id="drop">
+                Drop Here
+                <a>Browse</a>
+                <input type="file" name="upl" multiple />
+            </div>
+
+            <ul></ul>
+
+        </form>
+
+
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <!-- JavaScript Includes -->
+
+        <script src="~/Content/MultiUploader/js/jquery.knob.js"></script>
+         
+        <!-- jQuery File Upload Dependencies -->
+        <script src="~/Content/MultiUploader/js/jquery.ui.widget.js"></script>
+        <script src="~/Content/MultiUploader/js/jquery.iframe-transport.js"></script>
+        <script src="~/Content/MultiUploader/js/jquery.fileupload.js"></script>
+
+        <!-- Our main JS file -->
+        <script src="~/Content/MultiUploader/js/script.js"></script>
+
+
+    </div>
+</body>
+</html>

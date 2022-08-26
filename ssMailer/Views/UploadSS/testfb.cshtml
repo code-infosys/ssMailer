@@ -1,0 +1,135 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>testfb</title>
+    @*<script src="//connect.facebook.net/en_US/all.js"></script>*@
+
+</head>
+<body>
+
+    <div id="fb-root"></div>
+
+
+
+
+    <script>
+
+        var DEBUG = false;
+        window.fbAsyncInit = function () {
+            FB.Event.subscribe('auth.statusChange', onFacebookStatusChange);
+            FB.init({
+                appId: '1613491115540237',
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                xfbml: true  // parse XFBML
+            });
+
+            FB.getLoginStatus(onFacebookInitialLoginStatus);
+
+        };
+
+        (function () {
+            var e = document.createElement('script');
+            e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+            e.async = true;
+            document.getElementById('fb-root').appendChild(e);
+        }());
+
+        function facebookLogin() {
+            FB.login(onFacebookLoginStatus, { scope: 'user_likes' });
+        }
+
+        /*
+         * Callback function for 'auth.statusChange' event.
+         */
+        function onFacebookInitialLoginStatus(response) {
+            if (DEBUG) {
+                alert("onFacebookLoginStatus(), "
+                  + "\nresponse.status=" + response.status
+                  + " \nresponse.session=" + response.session
+                  + " \nresponse.perms=" + response.perms);
+            }
+            if (response.status == "connected" && response.authResponse) {
+                onReadyToBegin();
+            }
+            else {
+                facebookLogin();
+            }
+        }
+
+        /*
+         * Callback function for 'auth.statusChange' event.
+         */
+        function onFacebookStatusChange(response) {
+            if (DEBUG) {
+                alert("onFacebookStatusChange(), "
+                  + "\nresponse.status=" + response.status
+                  + " \nresponse.session=" + response.session
+                  + " \nresponse.perms=" + response.perms);
+            }
+        }
+
+        /*
+         * Callback function for 'auth.statusChange' event.
+         */
+        function onFacebookLoginStatus(response) {
+            if (DEBUG) {
+                alert("onFacebookLoginStatus(), "
+                  + "\nresponse.status=" + response.status
+                  + " \nresponse.session=" + response.session
+                  + " \nresponse.perms=" + response.perms);
+            }
+
+            if (response.status == "connected" && response.authResponse) {
+                onReadyToBegin();
+            }
+            else {
+                alert("Please login to enjoy this application.");
+            }
+        }
+
+        function onReadyToBegin() {
+            if (DEBUG) {
+                alert("You are all set.");
+            }
+            var loginButtonDiv = document.getElementById("fb-login-button-div");
+            loginButtonDiv.style.display = "none";
+
+            FB.api('/me/likes', onMyLikesResponse);
+        }
+
+        function onMyLikesResponseFormatted(response) {
+            //console.log(response);
+            var listOfLikesDiv = document.getElementById('list-of-likes-div');
+            var divContent = "";
+            for (var i = 0; i < response.data.length; i++) {
+                divContent += "<br>" + response.data[i].name + "<br><img src=\"" + "https://graph.facebook.com/" + response.data[i].id + "/picture\"/>";
+            }
+            listOfLikesDiv.innerHTML = "<h1>You liked</h1><br>" + divContent;
+        }
+
+        function onMyLikesResponse(response) {
+            var listOfLikesDiv = document.getElementById('list-of-likes-div');
+            listOfLikesDiv.innerHTML = "<h1>You like:</h1>";
+            for (var i = 0; i < response.data.length; i++) {
+                listOfLikesDiv.innerHTML += "<br>" + response.data[i].name;
+            }
+        }
+
+    </script>
+
+    <div id="fb-login-button-div">
+        Please login to enjoy all the features of this application:
+        <fb:login-button show-faces="false" scope="user_likes"></fb:login-button>
+    </div>
+    <div id="list-of-likes-div">
+    </div>
+</body>
+
+</html>
